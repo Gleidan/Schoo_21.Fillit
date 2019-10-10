@@ -79,8 +79,6 @@ int		ft_backtracking_solver(t_list *tetromino, char ***map)
 			if ((pointer[y][x] == '.' || (pointer[y][x] != '.' && tetro_block[0][0] == '.'))
 				&& ft_check_place(tetromino, map, x, y))
 			{
-				ft_display(*map);
-				ft_putchar('\n');
 				if (tetromino->next == NULL || ft_backtracking_solver(tetromino->next, map))
 					return (1);
 				else
