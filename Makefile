@@ -19,11 +19,11 @@ $(NAME): $(OBJ)
 	make -C libft/
 	clang -o $(NAME) $(CFLAGS) $(OBJ) -I libft -L libft/ -lft
 
-%.o:%.c $(HEAD)
+$(OBJ_DIR)/%.o:$(SRC_DIR)/%.c $(HEAD)
 	clang $(CFLAGS) -I includes -I libft -c $(SRC)
 
 clean:
-	-rm -f *.o
+	-rm -f $(OBJ_DIR)/*.o
 
 fclean: clean
 	-rm -f $(NAME)
