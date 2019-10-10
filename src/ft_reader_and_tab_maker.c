@@ -19,6 +19,7 @@ char		**ft_remove_usless(char **tab, int width, int height)
 	while (tab[++i])
 		temp[k++] = ft_strsub(tab[i], position, width);
 	temp[k] = 0;
+	ft_clear_table(tab, height + 1);
 	return (temp);
 }
 
@@ -44,7 +45,7 @@ char		**ft_tetro_tab_creator(char *str, int height, int width)
 		}
 	}
 	tetro_tab[counter_x] = 0;
-	ft_strdel(tmp);
+	ft_clear_table(tmp, counter_y + 1);
 	return (ft_remove_usless(tetro_tab, width, height));
 }
 
@@ -94,6 +95,8 @@ t_list		*ft_tetromino_creator(char *buf, char letter)
 	tetromino->letter = letter;
 	tetromino->table = ft_tetro_tab_creator(buf, tetromino->height, tetromino->width);
 	element = ft_lstnew(tetromino, sizeof(t_tetris));
+	free(copy);
+	free(size);
 	return (element);
 }
 

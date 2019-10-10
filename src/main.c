@@ -1,5 +1,15 @@
 #include "fillit.h"
 
+void	ft_free_tetro(t_tetris *tetromino, size_t size)
+{
+	if (!tetromino)
+		return ;
+	ft_clear_table(tetromino->table, tetromino->height + 1);
+	free(tetromino);
+	tetromino = NULL;
+}
+
+
 int		main(int argc, char **argv)
 {
 	int		fd;
@@ -19,6 +29,7 @@ int		main(int argc, char **argv)
 	map = ft_fill_square(list, &size);
 	ft_display(map);
 	ft_clear_table(map, size);
+	ft_lstdel(&list, ft_free_tetro);
 	close (fd);
 	return (0);
 }
