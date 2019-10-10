@@ -14,7 +14,7 @@ int		ft_check_sqr(char *buffer, int i)
 	if (i <= 19 && buffer[i + 1] == '#')
 		contact_checked++;
 	if (contact_checked != 1 && contact_checked != 2 && contact_checked != 3)
-		return (-56);
+		return (-100);
 	return (contact_checked);
 }
 
