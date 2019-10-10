@@ -57,23 +57,26 @@ t_size		*ft_get_size(char *buf)
 
 	if (!(size = malloc(sizeof(t_size))))
 		ft_error();
-	size->height = 0;
-	size->width = 0;
-	tmp = 0;
-	count = -1;
-	while (buf[++count])
+	else
 	{
-		if (buf[count] == '\n' && ++size->height && (size->width = (tmp > size->width) ? tmp : size->width))
-			tmp = 0;
-		else if (buf[count] == '#')
-			tmp++;
-		if ((buf[count] == '\n' || buf[count] == '.') || (buf[count + 3] == '#' &&
-			(buf[count + 4] == '#' || buf[count + 2] == '#')) ||
-			(buf[count + 6] == '#' && (buf[count + 7] == '#' || buf[count + 5])))
-			tmp++;
+		size->height = 0;
+		size->width = 0;
+		tmp = 0;
+		count = -1;
+		while (buf[++count])
+		{
+			if (buf[count] == '\n' && ++size->height && (size->width = (tmp > size->width) ? tmp : size->width))
+				tmp = 0;
+			else if (buf[count] == '#')
+				tmp++;
+			if ((buf[count] == '\n' || buf[count] == '.') || (buf[count + 3] == '#' &&
+															  (buf[count + 4] == '#' || buf[count + 2] == '#')) ||
+				(buf[count + 6] == '#' && (buf[count + 7] == '#' || buf[count + 5])))
+				tmp++;
+		}
+		size->width = (tmp > size->width) ? tmp : size->width;
+		size->height++;
 	}
-	size->width = (tmp > size->width) ? tmp : size->width;
-	size->height++;
 	return (size);
 }
 
@@ -87,17 +90,21 @@ t_list		*ft_tetromino_creator(char *buf, char letter)
 
 	if (!(tetromino = (t_tetris *)malloc(sizeof(t_tetris))))
 		ft_error();
-	pos = ft_strchr(buf, '#') - buf;
-	copy = ft_strsub(buf, pos, (ft_strrchr(buf, '#') - buf + 1) - pos);
-	size = ft_get_size(copy);
-	tetromino->width =  size->width;
-	tetromino->height = size->height;
-	tetromino->letter = letter;
-	tetromino->table = ft_tetro_tab_creator(buf, tetromino->height, tetromino->width);
-	element = ft_lstnew(tetromino, sizeof(t_tetris));
-	free(copy);
-	free(size);
-	return (element);
+	else
+	{
+		pos = ft_strchr(buf, '#') - buf;
+		copy = ft_strsub(buf, pos, (ft_strrchr(buf, '#') - buf + 1) - pos);
+		size = ft_get_size(copy);
+		tetromino->width = size->width;
+		tetromino->height = size->height;
+		tetromino->letter = letter;
+		tetromino->table = ft_tetro_tab_creator(buf, tetromino->height, tetromino->width);
+		element = ft_lstnew(tetromino, sizeof(t_tetris));
+		free(copy);
+		free(size);
+		return (element);
+	}
+	return (0);
 }
 
 t_list		*ft_read_fd(int fd)

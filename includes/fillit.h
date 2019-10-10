@@ -25,5 +25,6 @@ int				ft_check_buffer(char *buf, int bufflen);
 int				ft_sqrt(int nb);
 char 			**ft_make_clear_map(int size);
 t_list			*ft_read_fd(int fd);
+void			ft_free_list(void *content, size_t size);
 
 #endif

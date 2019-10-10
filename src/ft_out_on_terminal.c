@@ -29,6 +29,7 @@ char	**ft_make_clear_map(int size)
 		if (!(map[i] = malloc(sizeof(char) * (size + 1))))
 			ft_error();
 		map[i] = ft_memset(map[i], '.', size);
+		map[i][size] = 0;
 		i++;
 	}
 	map[i] = 0;
