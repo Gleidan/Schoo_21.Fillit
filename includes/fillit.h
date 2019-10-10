@@ -20,7 +20,7 @@ typedef struct	s_tetris
 
 void			ft_error(void);
 void			ft_display(char **map);
-char 			**ft_fill_square(t_list *tetromino);
+char 			**ft_fill_square(t_list *tetromino, int *size);
 int				ft_check_buffer(char *buf, int bufflen);
 int				ft_sqrt(int nb);
 char 			**ft_make_clear_map(int size);

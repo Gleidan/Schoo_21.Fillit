@@ -109,17 +109,16 @@ int		ft_backtracking_solver(t_list *tetromino, char ***map)
 	return (0);
 }
 
-char	**ft_fill_square(t_list *tetromino)
+char	**ft_fill_square(t_list *tetromino, int	*size)
 {
-	int		square_size;
 	char	**map;
 
-	square_size = ft_sqrt(4 * ft_list_len(tetromino));
-	map = ft_make_clear_map(square_size);
+	*size = ft_sqrt(4 * ft_list_len(tetromino));
+	map = ft_make_clear_map(*size);
 	while (!ft_backtracking_solver(tetromino, &map))
 	{
 		free(map);
-		map = ft_make_clear_map(square_size++);
+		map = ft_make_clear_map((*size)++);
 	}
 	return (map);
 }
