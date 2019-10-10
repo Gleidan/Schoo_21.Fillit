@@ -6,7 +6,7 @@ int		main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_putstr("usage\n");
+		ft_putstr("usage: fillit source file\n");
 		return (0);
 	}
 	fd = open(argv[1], O_RDONLY);

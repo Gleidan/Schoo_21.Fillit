@@ -57,5 +57,5 @@ int		ft_check_buffer(char *buf, int bufflen)
 	}
 	if (!ft_check_dot(buf) || (sharp != 6 && sharp != 8))
 		return (-1);
-	return (newline == 4 ? 0 : 1);
+	return (newline == 4 ? 1 : 0);
 }

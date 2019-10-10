@@ -1,13 +1,32 @@
 #include "fillit.h"
 
-int		ft_sqrt(int nb)
+int		ft_place(t_list *tetromino, char ***map, int x, int y)
 {
-	int result;
+	int		x_plus;
+	int		y_plus;
+	int		block;
+	char	**content;
+	char	**ptr;
 
-	result = 1;
-	while (result * result < nb)
-		result++;
-	return (result);
+	ptr = *map;
+	block = 0;
+	y_plus = -1;
+	content = ((t_tetris *)(tetromino->content))->table;
+	while (content[++y_plus])
+	{
+		x_plus = -1;
+		while (content[y_plus][++x_plus])
+		{
+			if (!(ptr[y + y_plus]))
+				return (0);
+			if (ptr[y + y_plus][x + x_plus] == '.' && content[y_plus][x_plus] != '.')
+			{
+				ptr[y + y_plus][x + x_plus] = ((t_tetris * )(tetromino->content))->letter;
+				block++;
+			}
+		}
+	}
+	return (block == 4);
 }
 
 void	ft_remove(t_list *tetromino, char ***map)
@@ -79,6 +98,7 @@ int		ft_backtracking_solver(t_list *tetromino, char ***map)
 			if ((pointer[y][x] == '.' || (pointer[y][x] != '.' && tetro_block[0][0] == '.'))
 				&& ft_check_place(tetromino, map, x, y))
 			{
+				ft_place(tetromino, map, x, y);
 				if (tetromino->next == NULL || ft_backtracking_solver(tetromino->next, map))
 					return (1);
 				else
@@ -99,7 +119,7 @@ char	**ft_fill_square(t_list *tetromino)
 	while (!ft_backtracking_solver(tetromino, &map))
 	{
 		free(map);
-		map = ft_make_clear_map(square_size);
+		map = ft_make_clear_map(square_size++);
 	}
 	return (map);
 }

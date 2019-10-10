@@ -1,6 +1,6 @@
 #ifndef FILLIT_H
 #define FILLIT_H
-#include "libft/libft.h"
+#include "libft.h"
 #include <unistd.h>
 #include <fcntl.h>
 
@@ -22,6 +22,7 @@ void			ft_error(void);
 void			ft_display(char **map);
 char 			**ft_fill_square(t_list *tetromino);
 int				ft_check_buffer(char *buf, int bufflen);
+int				ft_sqrt(int nb);
 char 			**ft_make_clear_map(int size);
 t_list			*ft_read_fd(int fd);
 

@@ -1,5 +1,15 @@
 #include "fillit.h"
 
+int		ft_sqrt(int nb)
+{
+	int result;
+
+	result = 1;
+	while (result * result < nb)
+		result++;
+	return (result);
+}
+
 void	ft_error(void)
 {
 	ft_putstr("error\n");
