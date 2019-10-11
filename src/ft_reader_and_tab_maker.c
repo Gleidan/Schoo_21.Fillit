@@ -1,4 +1,5 @@
 #include "fillit.h"
+#include <stdio.h>
 
 char		**ft_remove_usless(char **tab, int width, int height)
 {
@@ -70,7 +71,7 @@ t_size		*ft_get_size(char *buf)
 			else if (buf[count] == '#')
 				tmp++;
 			if ((buf[count] == '\n' || buf[count] == '.') || (buf[count + 3] == '#' &&
-															  (buf[count + 4] == '#' || buf[count + 2] == '#')) ||
+				(buf[count + 4] == '#' || buf[count + 2] == '#')) ||
 				(buf[count + 6] == '#' && (buf[count + 7] == '#' || buf[count + 5])))
 				tmp++;
 		}
@@ -92,6 +93,7 @@ t_list		*ft_tetromino_creator(char *buf, char letter)
 		ft_error();
 	else
 	{
+		printf("%p malloc, %ld\n", tetromino, sizeof(*tetromino));
 		pos = ft_strchr(buf, '#') - buf;
 		copy = ft_strsub(buf, pos, (ft_strrchr(buf, '#') - buf + 1) - pos);
 		size = ft_get_size(copy);
@@ -100,6 +102,10 @@ t_list		*ft_tetromino_creator(char *buf, char letter)
 		tetromino->letter = letter;
 		tetromino->table = ft_tetro_tab_creator(buf, tetromino->height, tetromino->width);
 		element = ft_lstnew(tetromino, sizeof(t_tetris));
+		free(tetromino);
+		printf("%p height\n", &tetromino->height);
+		printf("%p width\n", &tetromino->width);
+		printf("%p, %p list\n", element->content, &element->content);
 		free(copy);
 		free(size);
 		return (element);
