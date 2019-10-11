@@ -40,9 +40,8 @@ char		**ft_tetro_tab_creator(char *str, int height, int width)
 	{
 		if (ft_strchr(tmp[counter_y], '#'))
 		{
-			if (!(tetro_tab[counter_x] = (char *)malloc(sizeof(char) * 5)))
+			if (!(tetro_tab[counter_x++] = ft_strdup(tmp[counter_y])))
 				ft_error();
-			tetro_tab[counter_x++] = ft_strdup(tmp[counter_y]);
 		}
 	}
 	tetro_tab[counter_x] = 0;
@@ -102,10 +101,10 @@ t_list		*ft_tetromino_creator(char *buf, char letter)
 		tetromino->letter = letter;
 		tetromino->table = ft_tetro_tab_creator(buf, tetromino->height, tetromino->width);
 		element = ft_lstnew(tetromino, sizeof(t_tetris));
-		free(tetromino);
 		printf("%p height\n", &tetromino->height);
 		printf("%p width\n", &tetromino->width);
 		printf("%p, %p list\n", element->content, &element->content);
+		free(tetromino);
 		free(copy);
 		free(size);
 		return (element);
