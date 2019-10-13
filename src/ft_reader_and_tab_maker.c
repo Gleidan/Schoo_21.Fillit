@@ -18,7 +18,7 @@ char		**ft_remove_usless(char **tab, int width, int height)
 			position = ft_strchr(tab[i], '#') - tab[i];
 	i = -1;
 	while (tab[++i])
-		temp[k++] = ft_strsub(tab[i], position, width);
+		temp[k++] = ft_strsub(tab[i], position, TET_SIZE);
 	temp[k] = 0;
 	ft_clear_table(tab, height + 1);
 	return (temp);
@@ -47,6 +47,57 @@ char		**ft_tetro_tab_creator(char *str, int height, int width)
 	tetro_tab[counter_x] = 0;
 	ft_clear_table(tmp, counter_y + 1);
 	return (ft_remove_usless(tetro_tab, width, height));
+}
+
+int 		ft_height (char *buf)
+{
+	int 	h;
+	int 	c;
+
+	h = 0;
+	while (*buf)
+	{
+		c = 0;
+		while (*buf != '\n' && *buf)
+		{
+			if (*buf == '#')
+				c = 1;
+			buf++;
+		}
+		if (c)
+			h++;
+		buf++;
+	}
+	return  (h);
+}
+
+int 		ft_width (char *buf)
+{
+	int		width;
+	int 	c;
+	char 	*left;
+	char 	*right;
+	char 	**sub;
+	int 	y;
+	int 	x;
+
+	sub = ft_strsplit(buf, '\n');
+
+		width = 0;
+		while (*buf)
+		{
+			c = 0;
+			while (*buf && *buf != '\n')
+			{
+				if (*buf == '#')
+					c++;
+				buf++;
+			}
+			if (c > width)
+				width = c;
+			buf++;
+		}
+	return (width);
 }
 
 t_size		*ft_get_size(char *buf)
@@ -92,21 +143,24 @@ t_list		*ft_tetromino_creator(char *buf, char letter)
 		ft_error();
 	else
 	{
-		printf("%p malloc, %ld\n", tetromino, sizeof(*tetromino));
+//		printf("%p malloc, %ld\n", tetromino, sizeof(*tetromino));
 		pos = ft_strchr(buf, '#') - buf;
 		copy = ft_strsub(buf, pos, (ft_strrchr(buf, '#') - buf + 1) - pos);
 		size = ft_get_size(copy);
 		tetromino->width = size->width;
+//		tetromino->width = ft_width(buf);
 		tetromino->height = size->height;
+//		tetromino->height = ft_height(buf);
 		tetromino->letter = letter;
 		tetromino->table = ft_tetro_tab_creator(buf, tetromino->height, tetromino->width);
+//		ft_display(tetromino->table);
 		element = ft_lstnew(tetromino, sizeof(t_tetris));
-		printf("%p height\n", &tetromino->height);
-		printf("%p width\n", &tetromino->width);
-		printf("%p, %p list\n", element->content, &element->content);
+//		printf("%p height\n", &tetromino->height);
+//		printf("%p width\n", &tetromino->width);
+//		printf("%p, %p list\n", element->content, &element->content);
 		free(tetromino);
-		free(copy);
-		free(size);
+//		free(copy);
+//		free(size);
 		return (element);
 	}
 	return (0);
