@@ -4,6 +4,8 @@
 #include <unistd.h>
 #include <fcntl.h>
 
+#define TET_SIZE	5
+
 typedef struct	s_size
 {
 	int			height;
