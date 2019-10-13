@@ -1,7 +1,7 @@
 #include "fillit.h"
 #include <stdio.h>
 
-char		**ft_remove_usless(char **tab, int width, int height)
+char		**ft_remove_usless(char **tab, int height)
 {
 	int		i;
 	int		k;
@@ -24,7 +24,7 @@ char		**ft_remove_usless(char **tab, int width, int height)
 	return (temp);
 }
 
-char		**ft_tetro_tab_creator(char *str, int height, int width)
+char		**ft_tetro_tab_creator(char *str, int height)
 {
 	int		counter_x;
 	int		counter_y;
@@ -46,7 +46,7 @@ char		**ft_tetro_tab_creator(char *str, int height, int width)
 	}
 	tetro_tab[counter_x] = 0;
 	ft_clear_table(tmp, counter_y + 1);
-	return (ft_remove_usless(tetro_tab, width, height));
+	return (ft_remove_usless(tetro_tab, height));
 }
 
 int 		ft_height (char *buf)
@@ -147,12 +147,12 @@ t_list		*ft_tetromino_creator(char *buf, char letter)
 		pos = ft_strchr(buf, '#') - buf;
 		copy = ft_strsub(buf, pos, (ft_strrchr(buf, '#') - buf + 1) - pos);
 		size = ft_get_size(copy);
-		tetromino->width = size->width;
-//		tetromino->width = ft_width(buf);
+//		tetromino->width = size->width;
 		tetromino->height = size->height;
 //		tetromino->height = ft_height(buf);
 		tetromino->letter = letter;
-		tetromino->table = ft_tetro_tab_creator(buf, tetromino->height, tetromino->width);
+		tetromino->table = ft_tetro_tab_creator(buf, tetromino->height);
+		tetromino->width = ft_strlen(*tetromino->table);
 //		ft_display(tetromino->table);
 		element = ft_lstnew(tetromino, sizeof(t_tetris));
 //		printf("%p height\n", &tetromino->height);
