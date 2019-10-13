@@ -1,17 +1,13 @@
 #include "fillit.h"
-#include <stdio.h>
 
 void	ft_free_list(void *content, size_t size)
 {
 	t_tetris	*tetromino;
 
 	tetromino = (t_tetris*)content;
-	printf("%p content\n", content);
-	printf("%p *content\n", (t_tetris*)content);
 	if (!content)
 		return ;
 	ft_clear_table(tetromino->table, tetromino->height + 1);
-	printf("%p\n", tetromino);
 	free(tetromino);
 	tetromino = NULL;
 	size = 0;

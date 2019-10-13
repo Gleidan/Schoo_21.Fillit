@@ -1,5 +1,4 @@
 #include "fillit.h"
-#include <stdio.h>
 
 char		**ft_remove_usless(char **tab, int height)
 {
@@ -71,96 +70,21 @@ int 		ft_height (char *buf)
 	return  (h);
 }
 
-int 		ft_width (char *buf)
-{
-	int		width;
-	int 	c;
-	char 	*left;
-	char 	*right;
-	char 	**sub;
-	int 	y;
-	int 	x;
-
-	sub = ft_strsplit(buf, '\n');
-
-		width = 0;
-		while (*buf)
-		{
-			c = 0;
-			while (*buf && *buf != '\n')
-			{
-				if (*buf == '#')
-					c++;
-				buf++;
-			}
-			if (c > width)
-				width = c;
-			buf++;
-		}
-	return (width);
-}
-
-t_size		*ft_get_size(char *buf)
-{
-	int		count;
-	int		tmp;
-	t_size	*size;
-
-	if (!(size = malloc(sizeof(t_size))))
-		ft_error();
-	else
-	{
-		size->height = 0;
-		size->width = 0;
-		tmp = 0;
-		count = -1;
-		while (buf[++count])
-		{
-			if (buf[count] == '\n' && ++size->height && (size->width = (tmp > size->width) ? tmp : size->width))
-				tmp = 0;
-			else if (buf[count] == '#')
-				tmp++;
-			if ((buf[count] == '\n' || buf[count] == '.') || (buf[count + 3] == '#' &&
-				(buf[count + 4] == '#' || buf[count + 2] == '#')) ||
-				(buf[count + 6] == '#' && (buf[count + 7] == '#' || buf[count + 5])))
-				tmp++;
-		}
-		size->width = (tmp > size->width) ? tmp : size->width;
-		size->height++;
-	}
-	return (size);
-}
-
 t_list		*ft_tetromino_creator(char *buf, char letter)
 {
 	t_list		*element;
 	t_tetris	*tetromino;
-	t_size		*size;
-	char		*copy;
-	long		pos;
 
 	if (!(tetromino = (t_tetris *)malloc(sizeof(t_tetris))))
 		ft_error();
 	else
 	{
-//		printf("%p malloc, %ld\n", tetromino, sizeof(*tetromino));
-		pos = ft_strchr(buf, '#') - buf;
-		copy = ft_strsub(buf, pos, (ft_strrchr(buf, '#') - buf + 1) - pos);
-		size = ft_get_size(copy);
-//		tetromino->width = size->width;
-		tetromino->height = size->height;
-//		tetromino->height = ft_height(buf);
+		tetromino->height = ft_height(buf);
 		tetromino->letter = letter;
 		tetromino->table = ft_tetro_tab_creator(buf, tetromino->height);
 		tetromino->width = ft_strlen(*tetromino->table);
-//		ft_display(tetromino->table);
 		element = ft_lstnew(tetromino, sizeof(t_tetris));
-//		printf("%p height\n", &tetromino->height);
-//		printf("%p width\n", &tetromino->width);
-//		printf("%p, %p list\n", element->content, &element->content);
 		free(tetromino);
-		free(copy);
-		free(size);
 		return (element);
 	}
 	return (0);
