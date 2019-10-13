@@ -159,8 +159,8 @@ t_list		*ft_tetromino_creator(char *buf, char letter)
 //		printf("%p width\n", &tetromino->width);
 //		printf("%p, %p list\n", element->content, &element->content);
 		free(tetromino);
-//		free(copy);
-//		free(size);
+		free(copy);
+		free(size);
 		return (element);
 	}
 	return (0);
