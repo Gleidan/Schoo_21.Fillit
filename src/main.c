@@ -2,14 +2,14 @@
 
 void	ft_free_list(void *content, size_t size)
 {
-	t_tetris	*tet;
+	t_tetris	*tetromino;
 
-	tet = (t_tetris*)content;
+	tetromino = (t_tetris*)content;
 	if (!content)
 		return ;
-	ft_clear_table(tet->table, tet->height + 1);
-	free(tet);
-	tet = NULL;
+	ft_clear_table(tetromino->table, tetromino->height + 1);
+	free(tetromino);
+	tetromino = NULL;
 	size = 0;
 }
 
