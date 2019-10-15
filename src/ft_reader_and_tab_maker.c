@@ -81,6 +81,7 @@ t_list		*ft_tetromino_creator(char *buf, char letter)
 	{
 		tetromino->height = ft_height(buf);
 		tetromino->letter = letter;
+		tetromino->placed = 0;
 		tetromino->table = ft_tetro_tab_creator(buf, tetromino->height);
 		tetromino->width = ft_strlen(*tetromino->table);
 		element = ft_lstnew(tetromino, sizeof(t_tetris));

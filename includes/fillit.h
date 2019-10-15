@@ -17,6 +17,8 @@ typedef struct	s_tetris
 	int			width;
 	int			height;
 	char		letter;
+	int 		placed;
+	int 		skip;
 	char		**table;
 }				t_tetris;
 
@@ -28,5 +30,9 @@ int				ft_sqrt(int nb);
 char 			**ft_make_clear_map(int size);
 t_list			*ft_read_fd(int fd);
 void			ft_free_list(void *content, size_t size);
+int				ft_check_place(char **tetramino, char ***map, int x, int y);
+int				ft_place(t_tetris *tetramino, char ***map, int x, int y);
+void			ft_remove(t_tetris *tetramino, char ***map);
+int				ft_backtracking_solver(t_list *tmp, char ***map);
 
 #endif
