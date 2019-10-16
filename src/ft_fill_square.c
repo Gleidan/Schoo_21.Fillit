@@ -1,4 +1,5 @@
 #include "fillit.h"
+#include <stdlib.h>
 
 int		ft_place(t_list *tetromino, char ***map, int x, int y)
 {
@@ -99,6 +100,8 @@ int		ft_backtracking_solver(t_list *tetromino, char ***map)
 				&& ft_check_place(tetromino, map, x, y))
 			{
 				ft_place(tetromino, map, x, y);
+				system("clear");
+				ft_display(*map);
 				if (tetromino->next == NULL || ft_backtracking_solver(tetromino->next, map))
 					return (1);
 				else
