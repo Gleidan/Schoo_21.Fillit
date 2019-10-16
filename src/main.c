@@ -10,7 +10,7 @@ void	ft_free_list(void *content, size_t size)
 	ft_clear_table(tetromino->table, tetromino->height + 1);
 	free(tetromino);
 	tetromino = NULL;
-	size = 0;
+	size = size + 1;
 }
 
 
