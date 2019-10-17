@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_out_on_terminal.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmanhack <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/17 16:36:51 by mmanhack          #+#    #+#             */
+/*   Updated: 2019/10/17 16:37:28 by mmanhack         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fillit.h"
 
 int		ft_sqrt(int nb)
@@ -13,7 +25,7 @@ int		ft_sqrt(int nb)
 void	ft_error(void)
 {
 	ft_putstr("error\n");
-	exit (0);
+	exit(0);
 }
 
 char	**ft_make_clear_map(int size)

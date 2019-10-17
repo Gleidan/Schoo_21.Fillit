@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_reader_and_tab_maker.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmanhack <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/17 16:50:56 by mmanhack          #+#    #+#             */
+/*   Updated: 2019/10/17 16:53:00 by mmanhack         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fillit.h"
 
 char		**ft_remove_usless(char **tab, int height)
@@ -48,10 +60,10 @@ char		**ft_tetro_tab_creator(char *str, int height)
 	return (ft_remove_usless(tetro_tab, height));
 }
 
-int 		ft_height (char *buf)
+int			ft_height(char *buf)
 {
-	int 	h;
-	int 	c;
+	int		h;
+	int		c;
 
 	h = 0;
 	while (*buf)
@@ -67,7 +79,7 @@ int 		ft_height (char *buf)
 			h++;
 		buf++;
 	}
-	return  (h);
+	return (h);
 }
 
 t_list		*ft_tetromino_creator(char *buf, char letter)
@@ -93,7 +105,7 @@ t_list		*ft_tetromino_creator(char *buf, char letter)
 t_list		*ft_read_fd(int fd)
 {
 	t_list	*list;
-	char	buffer[21 + 1];
+	char	buf[21 + 1];
 	char	current_letter;
 	int		end_fd;
 	int		len;
@@ -101,17 +113,18 @@ t_list		*ft_read_fd(int fd)
 	list = NULL;
 	end_fd = 0;
 	current_letter = 'A';
-	while ((len = read(fd, buffer, 21)))
+	while ((len = read(fd, buf, 21)))
 	{
-		buffer[len] = '\0';
-		if ((end_fd == 0 && (len != 20 && len != 21)) || (end_fd == 1 && len != 20))
+		buf[len] = '\0';
+		if ((end_fd == 0 && (len != 20 && len != 21))
+				|| (end_fd == 1 && len != 20))
 			ft_error();
-		if ((end_fd = ft_check_buffer(buffer, len)) == -1)
+		if ((end_fd = ft_check_buffer(buf, len)) == -1)
 			ft_error();
 		if (list == NULL)
-			ft_lstadd(&list, ft_tetromino_creator(buffer, current_letter++));
+			ft_lstadd(&list, ft_tetromino_creator(buf, current_letter++));
 		else
-			ft_lstpushback(&list, ft_tetromino_creator(buffer, current_letter++));
+			ft_lstpushback(&list, ft_tetromino_creator(buf, current_letter++));
 	}
 	if (end_fd != 1 || ft_list_len(list) > 26)
 		ft_error();

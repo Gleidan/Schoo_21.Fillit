@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmanhack <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/17 16:37:49 by mmanhack          #+#    #+#             */
+/*   Updated: 2019/10/17 16:38:49 by mmanhack         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fillit.h"
 
 void	ft_free_list(void *content, size_t size)
@@ -12,7 +24,6 @@ void	ft_free_list(void *content, size_t size)
 	tetromino = NULL;
 	size = size + 1;
 }
-
 
 int		main(int argc, char **argv)
 {
@@ -34,6 +45,6 @@ int		main(int argc, char **argv)
 	ft_display(map);
 	ft_clear_table(map, size);
 	ft_lstdel(&list, &ft_free_list);
-	close (fd);
+	close(fd);
 	return (0);
 }

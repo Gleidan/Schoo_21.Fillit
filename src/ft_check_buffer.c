@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_check_buffer.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmanhack <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/17 16:34:41 by mmanhack          #+#    #+#             */
+/*   Updated: 2019/10/17 16:36:34 by mmanhack         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fillit.h"
 
 int		ft_check_sqr(char *buffer, int i)
@@ -44,7 +56,8 @@ int		ft_check_buffer(char *buf, int bufflen)
 	while (count < bufflen)
 	{
 		if ((buf[count] == '\n' && (count + 1) % 5 != 0) ||
-				((buf[count] != '#' || buf[count] != '.') && (count + 1) % 5 == 0))
+				((buf[count] != '#' || buf[count] != '.')
+				&& (count + 1) % 5 == 0))
 			return (-1);
 		if (buf[count] == '#')
 			sharp += ft_check_sqr(buf, count);
